@@ -2,6 +2,10 @@
 
 Patrasche Project with YOLOPv2 (Model Modified by Youngwoo Shin)
 
+## Important Notice
+***자세한 구현 내용은 공개가 허용되지 않았기에 일부 실행에 필수적인 library 등은 보여지지 않습니다***
+
+
 ## 개요
 
 성능 개선 및 속도 개선을 위해 아직 release 되지 않은 YOLOPv2 을 논문/YOLOP 모델을 참조하여 구성 후 학습, 파트라슈 엔진에 적용시킨다.
@@ -13,15 +17,15 @@ lane lane segmentation 및 drive area segmentation은 YOLOPv2 논문을 참조�
 
 |모델명                                                  |기능|image size (heightXwidth)|batch size|model inference time (s)|total process time (s)|Download Link|
 |---                                                    |---|---|---|---|---|---|
-|[YOLOPv2](https://github.com/CAIC-AD/YOLOPv2)|Object Detection, Segmentation|384X640|1|0.02|0.11|[yolopv2.pth](https://drive.google.com/file/d/10RdmZ2NdH1o1v-4jHAEEH5Zfa8kw1hWf/view?usp=sharing)|
-|[StrongSORT_OSNet](https://github.com/mikel-brostrom/Yolov5_StrongSORT_OSNet)|Object Tracking|256X128|16|0.03|0.11|[osnet_x0_25_msmt17.pt](https://drive.google.com/file/d/15JQ9m3l0ZsEOuv8oOruzkBJmsaCW_qPO/view?usp=sharing)|
+|[YOLOPv2](https://github.com/CAIC-AD/YOLOPv2)|Object Detection, Segmentation|384X640|1|0.02|0.11||
+|[StrongSORT_OSNet](https://github.com/mikel-brostrom/Yolov5_StrongSORT_OSNet)|Object Tracking|256X128|16|0.03|0.11||
 
 ### TensorRT
 
 |모델명                                                  |기능|image size (heightXwidth)|batch size|model inference time (s)|total process time (s)|Download Link|
 |---                                                    |---|---|---|---|---|---|
-|[YOLOPv2](https://github.com/CAIC-AD/YOLOPv2)|Object Detection, Segmentation|384X640|1|0.007(Server) 0.28(JetsonNano)|0.11(Server) 0.60(0.49)(JetsonNano)|[yolopv2.trt](https://drive.google.com/file/d/1__0VFK3H9nDaWfT4wju6z--tS_NRAR7P/view?usp=sharing)|
-|[StrongSORT_OSNet](https://github.com/mikel-brostrom/Yolov5_StrongSORT_OSNet)|Object Tracking|256X128|16|0.04(Server) 0.11(0.035)(JetsonNano)|0.11(Server) 0.60(0.49)(JetsonNano)|[strongsort_256X128_bs_16.trt](https://drive.google.com/file/d/1AR_Bl8XDkw-zhpTaZRBmqURJ4p64Ixik/view?usp=sharing)|
+|[YOLOPv2](https://github.com/CAIC-AD/YOLOPv2)|Object Detection, Segmentation|384X640|1|0.007(Server) 0.28(JetsonNano)|0.11(Server) 0.60(0.49)(JetsonNano)||
+|[StrongSORT_OSNet](https://github.com/mikel-brostrom/Yolov5_StrongSORT_OSNet)|Object Tracking|256X128|16|0.04(Server) 0.11(0.035)(JetsonNano)|0.11(Server) 0.60(0.49)(JetsonNano)||
 
 * StrongSORT_OSNet의 경우 batchsize가 16인 이유는 한 프레임을 처리할 시 최대 16개의 track-able 한 object가 나올 수 있다는 가정 하에 위의 batch size를 표기. 실제로는 한 개의 영상 프레임을 처리한다는 것을 내포.
 
@@ -67,17 +71,9 @@ tensorrt의 경우 설치가 까다롭기에 docker image를 활용.
 
 ### 실행 환경
 
-- 49.50.163.17 서버 anaconda:owod
-- 49.50.161.173 서버 anaconda:yolop
+N/A
 
 ### Torch
-
-먼저 feature extractor 를 확인한다. 아래 파일이 pt 파일을 import 해오는 feature extractor인지 확인한다.
-
-```python
-deep-person-reid/torchreid/utils/feature_extractor.py
-```
-
 
 전체적 프로세스 실행 및 결과 영상을 보고 싶다면 아래 visualization flag를 준다.
 
@@ -94,12 +90,6 @@ python3 patrasche.py
 단순히 도로 영역 추출, 혹은 객체인식/트래킹 결과 영상만 저장하고 싶다면 --seg-visualization, --track-visualization 옵션을 활용하면 된다.
 
 ### TensorRT
-
-먼저 feature extractor 를 확인한다. 아래 파일이 trt 파일을 import 해오는 feature extractor인지 확인한다.
-
-```python
-deep-person-reid/torchreid/utils/feature_extractor.py
-```
 
 전체적 프로세스 실행 및 결과 영상을 보고 싶다면 아래 visualization flag를 준다.
 
