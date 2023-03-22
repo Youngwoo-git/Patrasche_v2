@@ -110,8 +110,4 @@ python3 patrasche_trt.py
 
 **데모는 원본, 도로 영역 추출, 객체인식/트래킹 결과, 종합 결과 순으로 정렬**
 
-<img src="./demo/014.png"/>
-<img src="./demo/030.png"/>
-<img src="./demo/038.png"/>
-
 ![Demo Video](./demo/complete_demo.gif)
